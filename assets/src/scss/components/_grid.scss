@@ -1,0 +1,85 @@
+/* GRID COMPONENT FILE */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+	height: auto !important; 
+}
+.row{
+	float: left;
+	width: 100%;
+}
+.content{
+	display: block;
+	margin: 0 auto;
+	width: $content_width;
+	max-width: $content_max_width;
+	padding: 0 10px;
+}
+
+.columns{
+	float: left;	
+}
+
+//grid initials
+.columns {
+	width: 100%;
+	min-height: 1px; 
+	padding-left: $gutter;
+	padding-right: $gutter;
+}
+.grid-row{
+	overflow-x: hidden; 
+}
+.grid{
+	margin-left: -$gutter;
+	margin-right: -$gutter;
+}
+
+//small default column class
+@for $i from 1 through 12 {
+    .small-#{$i} { 
+        width: 100% / 12 * $i;
+    }
+}
+
+//make grid based on breakpoints
+@each $class, $points in $breakpoints{
+	@media screen and(min-width: $points) {
+		@for $i from 1 through 12 {
+		    .#{$class}-#{$i} { 
+		        width: 100% / 12 * $i;
+		    }
+		}
+	}
+} 
+.pull-right{
+	text-align: right;
+}
+.pull-left{
+	text-align-last: auto;
+}
+.center{
+	text-align: center;
+	font-size: 0;
+}
+.lego{
+	display: inline-block;
+	float: none;
+	font-size: $default_font_size;
+	text-align: left;
+}

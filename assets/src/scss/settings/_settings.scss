@@ -1,0 +1,120 @@
+/* ==========================================================================
+   GENERAL SETTINGS
+   ========================================================================== */
+$default_font_size: 14px;
+$dev_color: rgba(#09f, 0.3);
+$default_link_color: #4078c0;
+$default_color: #282828;
+
+/* Grid system settings
+========================================================================== */
+$content_max_width: 980px;
+$content_width: 100%;
+$gutter: 10px;
+$breakpoints: (
+	small: 400px,
+	medium: 600px,
+	large: 800px,
+	big: 1100px
+);
+
+
+/* Theme colors
+========================================================================== */
+$colors: (
+	#0099ff, 
+	#0a85d6, 
+	#33adff, 
+	#5cbdff
+);
+
+
+/* Default Grayscale Pallete
+   ========================================================================== */
+$light: #fff;
+
+//Golden Ratio for grayscale
+$gray: (
+	darken($light, 3%),
+	darken($light, 5%),
+	darken($light, 8%),
+	darken($light, 13%),
+	darken($light, 21%),
+	darken($light, 34%),
+	darken($light, 55%),
+	darken($light, 89%)
+);
+
+/* Success colors
+   ========================================================================== */
+$success: (
+	#33ae33,
+	#4cb84c,
+	#9de19d
+);
+
+/* Warning colors
+   ========================================================================== */
+$warning: (
+	#ffee66,
+	#FFD666,
+	#C1A24D
+);
+
+/* Error colors
+   ========================================================================== */
+$error: (
+	#E5525E,
+	#cd332c,
+	#9a121c
+);
+
+/* Fonts
+   ========================================================================== */
+$fonts: (
+	("Helvetica", arial, sans-serif),
+	("Helvetica", times, sans-serif),
+	("Helvetica", verdana, sans-serif),
+	("Helvetica", tahoma, sans-serif),
+);
+
+
+/* Easing - only here use lowerCamelCase
+========================================================================== */
+$easeInSine: cubic-bezier(0.47, 0, 0.745, 0.715);
+$easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$easeInOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+
+$easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$easeInOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+$easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+$easeInOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+$easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+$easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+$easeInOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+$easeInQuint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+$easeInOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+
+$easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+$easeInOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+
+$easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+$easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+$easeInOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+$easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+$easeInOutFast: cubic-bezier(1,0,0,1);
+
+$authenticMotion: cubic-bezier(.4,0,.2,1);
+
+

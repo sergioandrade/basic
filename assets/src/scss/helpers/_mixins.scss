@@ -1,0 +1,8 @@
+@mixin centered($width, $height) {
+	left: 50%;
+	margin-left: -($width/2);
+	width: $width;
+	top: 50%;
+	margin-top: -($height/2);
+	height: $height;
+}
