@@ -2,7 +2,7 @@
    GENERAL SETTINGS
    ========================================================================== */
 $default_font_size: 14px;
-$dev_color: rgba(#09f, 0.3);
+$dev_color: rgba(#f20, 0.3);
 $default_link_color: #4078c0;
 $default_color: #282828;
 
@@ -35,14 +35,14 @@ $light: #fff;
 
 //Golden Ratio for grayscale
 $gray: (
-	darken($light, 3%),
-	darken($light, 5%),
-	darken($light, 8%),
-	darken($light, 13%),
-	darken($light, 21%),
-	darken($light, 34%),
-	darken($light, 55%),
-	darken($light, 89%)
+	darken($light, 3),
+	darken($light, 5),
+	darken($light, 8),
+	darken($light, 13),
+	darken($light, 21),
+	darken($light, 34),
+	darken($light, 55),
+	darken($light, 89)
 );
 
 /* Success colors
@@ -116,5 +116,3 @@ $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 $easeInOutFast: cubic-bezier(1,0,0,1);
 
 $authenticMotion: cubic-bezier(.4,0,.2,1);
-
-

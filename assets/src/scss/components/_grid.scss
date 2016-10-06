@@ -42,12 +42,21 @@ img {
 	padding-left: $gutter;
 	padding-right: $gutter;
 }
-.grid-row{
-	overflow-x: hidden; 
-}
 .grid{
 	margin-left: -$gutter;
 	margin-right: -$gutter;
+}
+.grid-center{
+	@extend .grid;
+	text-align: center;
+	font-size: 0;
+	.columns{
+		display: inline-block;
+		float: none;
+		padding-left: $gutter;
+		padding-right: $gutter;
+		font-size: $default_font_size;
+	}
 }
 
 //small default column class
@@ -67,19 +76,13 @@ img {
 		}
 	}
 } 
+
 .pull-right{
-	text-align: right;
+	float: right;
 }
 .pull-left{
-	text-align-last: auto;
+	float: left;
 }
-.center{
+.text-center{
 	text-align: center;
-	font-size: 0;
-}
-.lego{
-	display: inline-block;
-	float: none;
-	font-size: $default_font_size;
-	text-align: left;
 }

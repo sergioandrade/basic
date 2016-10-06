@@ -7,4 +7,4 @@ Já temos o `package.json` com os modulos definidos, basta apenas rodar o `npm i
 
 
 ## RODAR
-Apenas o comando `gulp`
+Apenas o comando `npm start` que chama a task default do gulp
