@@ -1,5 +1,6 @@
 ﻿var gulp = require('gulp');
 var sass = require('gulp-sass');
+var htmlmin = require('gulp-htmlmin');
 var autoprefixer = require('gulp-autoprefixer');
 var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
@@ -8,27 +9,29 @@ var browserSync = require('browser-sync').create();
 var paths = {
     'src':{
         'scripts': [
-            './assets/src/js/*.js',
-            './bower_components/vue/dist/vue.min.js'
+            './assets/js/*.js',
         ],
         'styles': [
-            './assets/src/scss/*.scss',
-            './assets/src/scss/**/*.scss',
+            './assets/scss/*.scss',
+            './assets/scss/**/*.scss',
         ],
         'images': [
-            './assets/src/img/*.+(png|jpg|jpeg|gif|svg)',
-            './assets/src/img/**/*.+(png|jpg|jpeg|gif|svg)'
+            './assets/img/*.+(png|jpg|jpeg|gif|svg)',
+            './assets/img/**/*.+(png|jpg|jpeg|gif|svg)'
         ],
-        'fonts': './assets/src/fonts/**/*',
+        'fonts': './assets/fonts/**/*',
         'html': [
             './*.html',
+            './app/*.html',
+            './app/**/*.html'
         ]
     },
     'dist':{
-        'scripts':'./assets/dist/js/',
-        'styles': './assets/dist/css/',
-        'images': './assets/dist/img/',
-        'fonts': './assets/dist/fonts/'
+        'scripts':'./dist/js/',
+        'styles': './dist/css/',
+        'images': './dist/img/',
+        'fonts': './dist/fonts/',
+        "html": './dist/',
     }
 }
 
@@ -36,7 +39,7 @@ var paths = {
 gulp.task('browserSync', function() {
     browserSync.init({
         server: {
-            baseDir: './'
+            baseDir: './dist'
         },
         ghostMode: false,
         notify: {
@@ -55,8 +58,8 @@ gulp.task('browserSync', function() {
 //====================================
 gulp.task('scripts', function() {
     return gulp.src(paths.src.scripts)
-    .pipe(concat('main.min.js'))
     .pipe(uglify())
+    .pipe(concat('main.min.js'))
     .pipe(gulp.dest(paths.dist.scripts))
     .pipe(browserSync.reload({
         stream: true
@@ -80,6 +83,13 @@ gulp.task('sass', function(){
 })
 
 //====================================
+gulp.task('html', function() {
+    return gulp.src(paths.src.html)
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest(paths.dist.html))
+});
+
+//====================================
 gulp.task('fonts', function() {
     return gulp.src(paths.src.fonts)
     .pipe(gulp.dest(paths.dist.fonts))
@@ -97,7 +107,7 @@ gulp.task('watch', function(){
     gulp.watch(paths.src.styles,  ['sass']); 
     gulp.watch(paths.src.images,  ['images']); 
     gulp.watch(paths.src.scripts, ['scripts']); 
-    gulp.watch(paths.src.html).on('change', browserSync.reload);
+    gulp.watch(paths.src.html,    ['html']).on('change', browserSync.reload);
 })
 
 gulp.task('default',[
@@ -106,6 +116,7 @@ gulp.task('default',[
         'images',
         'scripts',
         'fonts',
+        'html',
         'browserSync'
     ],
     function(){
