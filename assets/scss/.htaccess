@@ -1,4 +1,0 @@
-RewriteEngine On
-
-RewriteCond %{REQUEST_URI} !^/app/
-RewriteRule ^(.*)$ /app/$1 [L,R=301]

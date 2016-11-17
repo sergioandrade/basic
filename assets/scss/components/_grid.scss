@@ -1,24 +1,3 @@
-/* GRID COMPONENT FILE */
-html {
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden
-}
-
-img {
-	width: auto;
-	max-width: 100%;
-	height: auto !important; 
-}
 .row{
 	float: left;
 	width: 100%;
@@ -30,13 +9,8 @@ img {
 	max-width: $content_max_width;
 	padding: 0 10px;
 }
-
-.columns{
+.columns, .column {
 	float: left;	
-}
-
-//grid initials
-.columns {
 	width: 100%;
 	min-height: 1px; 
 	padding-left: $gutter;
@@ -59,7 +33,7 @@ img {
 	}
 }
 
-//small default column class
+//small class is default column class
 @for $i from 1 through 12 {
     .small-#{$i} { 
         width: 100% / 12 * $i;
@@ -76,7 +50,6 @@ img {
 		}
 	}
 } 
-
 .pull-right{
 	float: right;
 }
