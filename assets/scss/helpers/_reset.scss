@@ -56,7 +56,7 @@ html{
 body{
 	min-height: 100%;
 	height: 100%;
-	font-family: nth($fonts, 2);
+	font-family: nth($fonts, 1);
 	font-size: $default_font_size;
 	line-height: 1.4;
 	color: $default_color;

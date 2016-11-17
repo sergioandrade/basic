@@ -1,15 +1,18 @@
-﻿var gulp = require('gulp');
-var sass = require('gulp-sass');
-var htmlmin = require('gulp-htmlmin');
+﻿var gulp         = require('gulp');
+var sass         = require('gulp-sass');
+var htmlmin      = require('gulp-htmlmin');
 var autoprefixer = require('gulp-autoprefixer');
-var imagemin = require('gulp-imagemin');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var browserSync = require('browser-sync').create();
-var paths = {
+var imagemin     = require('gulp-imagemin');
+var uglify       = require('gulp-uglify');
+var concat       = require('gulp-concat');
+var browserSync  = require('browser-sync').create();
+
+var paths        = {
     'src':{
         'scripts': [
-            './assets/js/*.js',
+            './bower_components/angular/angular.min.js',
+            './bower_components/angular-ui-router/release/angular-ui-router.js',
+            './assets/js/*.js'
         ],
         'styles': [
             './assets/scss/*.scss',
@@ -21,9 +24,9 @@ var paths = {
         ],
         'fonts': './assets/fonts/**/*',
         'html': [
-            './*.html',
-            './app/*.html',
-            './app/**/*.html'
+            './www/*.html',
+            './www/*.html',
+            './www/**/*.html'
         ]
     },
     'dist':{
@@ -118,8 +121,7 @@ gulp.task('default',[
         'fonts',
         'html',
         'browserSync'
-    ],
-    function(){
+    ],function(){
         return;
     }
 )

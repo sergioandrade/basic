@@ -1,9 +1,11 @@
 {
-	"name": "Basic",
-	"description": "Basic structure",
-	"version": "1.0.0",
-	"private": true,
-	"dependencies": {
-		
-	}
+  "name": "Basic",
+  "description": "Basic structure",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "1.5.8",
+    "angular-ui-router": "^0.3.2"
+  }
 }
