@@ -2,6 +2,4 @@
 
 	"use strict";
 
-	angular.module('basic', ['ui.router']);
-
 })();
