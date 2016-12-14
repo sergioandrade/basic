@@ -1,18 +1,20 @@
-﻿var gulp         = require('gulp');
-var sass         = require('gulp-sass');
-var htmlmin      = require('gulp-htmlmin');
-var autoprefixer = require('gulp-autoprefixer');
-var imagemin     = require('gulp-imagemin');
-var uglify       = require('gulp-uglify');
-var concat       = require('gulp-concat');
-var browserSync  = require('browser-sync').create();
-
-var paths        = {
+var gulp             = require('gulp');
+var sass             = require('gulp-sass');
+var htmlmin          = require('gulp-htmlmin');
+var autoprefixer     = require('gulp-autoprefixer');
+var imagemin         = require('gulp-imagemin');
+var uglify           = require('gulp-uglify');
+var concat           = require('gulp-concat');
+var browserSync      = require('browser-sync').create();
+var angularFilesort  = require('gulp-angular-filesort');
+var inject           = require('gulp-inject');
+var paths            = {
     'src':{
         'scripts': [
             './bower_components/angular/angular.min.js',
             './bower_components/angular-ui-router/release/angular-ui-router.js',
-            './assets/js/*.js'
+            './assets/js/*.js',
+            './src/**/*.js'
         ],
         'styles': [
             './assets/scss/*.scss',
@@ -24,9 +26,9 @@ var paths        = {
         ],
         'fonts': './assets/fonts/**/*',
         'html': [
-            './www/*.html',
-            './www/*.html',
-            './www/**/*.html'
+            './src/*.html',
+            './src/*.html',
+            './src/**/*.html'
         ]
     },
     'dist':{
@@ -113,11 +115,20 @@ gulp.task('watch', function(){
     gulp.watch(paths.src.html,    ['html']).on('change', browserSync.reload);
 })
 
+
+//====================================
+gulp.task('index', ['scripts', 'sass', 'html'], function () {
+    var source = [paths.dist.scripts+'*js', paths.dist.styles+'*.css'];
+    gulp.src(paths.dist.html+'index.html')
+      .pipe(inject(gulp.src(source, {read: false}), {relative: true}))
+      .pipe(gulp.dest('./dist'));
+});
+
+
 gulp.task('default',[
         'watch',
-        'sass',
+        'index',
         'images',
-        'scripts',
         'fonts',
         'html',
         'browserSync'

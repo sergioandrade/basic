@@ -13,10 +13,12 @@
   "scripts": {
     "start": "gulp"
   },
+  "postinstall": "bower install",
   "devDependencies": {
     "bower": "^1.7.9",
     "browser-sync": "^2.16.0",
     "gulp": "^3.9.1",
+    "gulp-angular-filesort": "^1.1.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.0",
     "gulp-htmlmin": "^3.0.0",
