@@ -124,7 +124,6 @@ gulp.task('index', ['scripts', 'sass', 'html'], function () {
       .pipe(gulp.dest('./dist'));
 });
 
-
 gulp.task('default',[
         'watch',
         'index',
