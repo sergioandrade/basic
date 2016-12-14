@@ -17,6 +17,18 @@ Através do npm install, o basic vai buscar todas as dependências necessárias 
 $ npm start
 ```
 
+___
+*TODO*
+
+	1. Compilar SASS ---------------------------  ☑ 
+	2. Minificar e agrupar JS ------------------  ☑
+	3. Injetar e ordenar os arquivos Angular ---  ☑
+	4. Configurar Rotas e Módulos --------------  ✖
+	5. Configurar variáveis de ambiente --------  ✖
+	6. Usar template cache do Angular ----------  ✖
+	7. Configurar loaders ----------------------  ✖
+	8. Configurar mensagens de erros e etc -----  ✖
+
 ## License
 
 [The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
