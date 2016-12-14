@@ -1,4 +1,4 @@
-![Basic logotipo](/basic.svg)
+![Basic logotipo](https://raw.githubusercontent.com/sergioandrade/basic/master/basic.svg)
 # Basic
 
 > _Basic_ - Estrutura básica para fazer projetos.
