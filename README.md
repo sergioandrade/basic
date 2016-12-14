@@ -1,10 +1,24 @@
-## BASIC
-Esté é o basic, uma estrutura padrão com gulp para rodar projetos com simples html e sass
+[![Basic logotipo](basic.svg)]()
+
+# Basic
+
+> _Basic_ - Estrutura básica para fazer projetos.
+
+Basic é uma ferramenta para fazer aplicações usando angular, sass, gulp e outras coisas.
 
 
-## INSTALAÇÃO
-Já temos o `package.json` com os modulos definidos, basta apenas rodar o `npm install`
+## Instalação
 
+```shell
+$ npm install
+```
+Através do npm install, o basic vai buscar todas as dependências necessárias para rodar e após isso vai chamar o `bower install` automaticamente
 
-## RODAR
-Apenas o comando `npm start` que chama a task default do gulp
+## Rodando em produção
+```shell
+$ npm start
+```
+
+## License
+
+[The MIT License (MIT)](http://opensource.org/licenses/mit-license.php)
