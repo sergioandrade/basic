@@ -1,4 +1,4 @@
-![Basic logotipo](basic.svg)
+![Basic logotipo](/basic.svg)
 # Basic
 
 > _Basic_ - Estrutura básica para fazer projetos.
