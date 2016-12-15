@@ -37,8 +37,13 @@ var paths            = {
         'images': './dist/img/',
         'fonts': './dist/fonts/',
         "html": './dist/',
-    }
+    },
 }
+
+var injectable = [
+    paths.dist.scripts+'*js',
+    paths.dist.styles+'*.css'
+]
 
 //====================================
 gulp.task('browserSync', function() {
@@ -63,7 +68,7 @@ gulp.task('browserSync', function() {
 //====================================
 gulp.task('scripts', function() {
     return gulp.src(paths.src.scripts)
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(concat('main.min.js'))
     .pipe(gulp.dest(paths.dist.scripts))
     .pipe(browserSync.reload({
@@ -109,20 +114,31 @@ gulp.task('images', function(){
 
 //====================================
 gulp.task('watch', function(){
-    gulp.watch(paths.src.styles,  ['sass']); 
-    gulp.watch(paths.src.images,  ['images']); 
     gulp.watch(paths.src.scripts, ['scripts']); 
-    gulp.watch(paths.src.html,    ['html']).on('change', browserSync.reload);
+    gulp.watch(paths.src.styles,  ['sass']); 
+    gulp.watch(paths.src.fonts,   ['fonts']); 
+    gulp.watch(paths.src.images,  ['images']); 
+    gulp.watch(paths.src.html,    ['inject']);
+    
+    gulp.watch(paths.dist.html).on('change', browserSync.reload);
 })
-
 
 //====================================
 gulp.task('index', ['scripts', 'sass', 'html'], function () {
-    var source = [paths.dist.scripts+'*js', paths.dist.styles+'*.css'];
     gulp.src(paths.dist.html+'index.html')
-      .pipe(inject(gulp.src(source, {read: false}), {relative: true}))
-      .pipe(gulp.dest('./dist'));
+        .pipe(inject(gulp.src(injectable, {read: false}), {relative: true}))
+        .pipe(gulp.dest('./dist'));
 });
+
+gulp.task('inject', ['html'], function () {
+    gulp.src(paths.dist.html+'index.html')
+        .pipe(inject(gulp.src(injectable, {read: false}), {relative: true}))
+        .pipe(gulp.dest('./dist'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+});
+
 
 gulp.task('default',[
         'watch',
