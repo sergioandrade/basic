@@ -1,5 +1,6 @@
-<img src="http://logo.basic.surge.sh/basic.svg" width="40%">
+<img src="http://logo.basic.surge.sh/basic.png" width="300px">
 
+<br>
 > _Basic_ - Estrutura básica para fazer projetos.
 
 Basic é uma ferramenta para fazer aplicações usando angular, sass, gulp e outras coisas.
