@@ -8,11 +8,15 @@ var concat           = require('gulp-concat');
 var browserSync      = require('browser-sync').create();
 var angularFilesort  = require('gulp-angular-filesort');
 var inject           = require('gulp-inject');
+var environments     = require('gulp-environments');
+var development      = environments.development;
+var production       = environments.production;
 var paths            = {
     'src':{
         'scripts': [
             './bower_components/angular/angular.min.js',
             './bower_components/angular-ui-router/release/angular-ui-router.js',
+            './bower_components/angular-sanitize/angular-sanitize.js',
             './assets/js/*.js',
             './src/**/*.js'
         ],
@@ -68,7 +72,7 @@ gulp.task('browserSync', function() {
 //====================================
 gulp.task('scripts', function() {
     return gulp.src(paths.src.scripts)
-    // .pipe(uglify())
+    .pipe(production(uglify()))
     .pipe(concat('main.min.js'))
     .pipe(gulp.dest(paths.dist.scripts))
     .pipe(browserSync.reload({
@@ -79,17 +83,26 @@ gulp.task('scripts', function() {
 //====================================
 gulp.task('sass', function(){
     return gulp.src(paths.src.styles)
-    .pipe(sass({
-        outputStyle: 'compressed'
-    }).on('error', sass.logError))
+
+    .pipe(development(sass({
+        style: 'expanded',
+        sourceComments: 'normal'
+    }).on('error', sass.logError)))
+
+    .pipe(production(sass({
+       outputStyle: 'compressed'
+    })))
+
     .pipe(autoprefixer({
         browsers: ['last 3 versions'],
         cascade: true
     }))
+
     .pipe(gulp.dest(paths.dist.styles))
-    .pipe(browserSync.reload({
+
+    .pipe(production(browserSync.reload({
         stream: true
-    }))
+    })))
 })
 
 //====================================
@@ -139,7 +152,6 @@ gulp.task('inject', ['html'], function () {
         }))
 });
 
-
 gulp.task('default',[
         'watch',
         'index',
@@ -147,6 +159,16 @@ gulp.task('default',[
         'fonts',
         'html',
         'browserSync'
+    ],function(){
+        return;
+    }
+)
+
+gulp.task('build',[
+        'index',
+        'images',
+        'fonts',
+        'html'
     ],function(){
         return;
     }
