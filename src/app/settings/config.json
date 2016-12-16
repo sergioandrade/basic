@@ -1,0 +1,14 @@
+{
+	"env": {
+		"development": {
+			"env": {
+				"api": "http://localhost/"
+			}
+		},
+		"production": {
+			"env": {
+				"api": "https://api.production.com/"
+			}
+		}
+	}
+}

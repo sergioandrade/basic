@@ -8,13 +8,14 @@ var concat           = require('gulp-concat');
 var browserSync      = require('browser-sync').create();
 var angularFilesort  = require('gulp-angular-filesort');
 var inject           = require('gulp-inject');
+var gulpNgConfig     = require('gulp-ng-config');
 var environments     = require('gulp-environments');
 var development      = environments.development;
 var production       = environments.production;
 var paths            = {
     'src':{
         'scripts': [
-            './bower_components/angular/angular.min.js',
+            './bower_components/angular/angular.js',
             './bower_components/angular-ui-router/release/angular-ui-router.js',
             './bower_components/angular-sanitize/angular-sanitize.js',
             './assets/js/*.js',
@@ -42,6 +43,7 @@ var paths            = {
         'fonts': './dist/fonts/',
         "html": './dist/',
     },
+    'config':'./src/app/settings/config.json'
 }
 
 var injectable = [
@@ -70,7 +72,7 @@ gulp.task('browserSync', function() {
 })
 
 //====================================
-gulp.task('scripts', function() {
+gulp.task('scripts', ['environments'], function() {
     return gulp.src(paths.src.scripts)
     .pipe(production(uglify()))
     .pipe(concat('main.min.js'))
@@ -83,23 +85,21 @@ gulp.task('scripts', function() {
 //====================================
 gulp.task('sass', function(){
     return gulp.src(paths.src.styles)
-
+    //dev
     .pipe(development(sass({
         style: 'expanded',
         sourceComments: 'normal'
     }).on('error', sass.logError)))
 
+    //prod
     .pipe(production(sass({
        outputStyle: 'compressed'
     })))
-
     .pipe(autoprefixer({
         browsers: ['last 3 versions'],
         cascade: true
     }))
-
     .pipe(gulp.dest(paths.dist.styles))
-
     .pipe(production(browserSync.reload({
         stream: true
     })))
@@ -108,7 +108,7 @@ gulp.task('sass', function(){
 //====================================
 gulp.task('html', function() {
     return gulp.src(paths.src.html)
-    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(development(htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest(paths.dist.html))
 });
 
@@ -152,12 +152,28 @@ gulp.task('inject', ['html'], function () {
         }))
 });
 
+//====================================
+gulp.task('environments', function () {
+    gulp.src(paths.config)
+    .pipe(concat('app.config.js'))
+    .pipe(production(gulpNgConfig('aprove.config', {
+        wrap: true,
+        environment: 'env.production'
+    })))
+    .pipe(development(gulpNgConfig('aprove.config', {
+        wrap: true,
+        environment: 'env.development'
+    })))
+    .pipe(gulp.dest('./src/app/'))
+});
+
 gulp.task('default',[
         'watch',
         'index',
         'images',
         'fonts',
         'html',
+        'environments',
         'browserSync'
     ],function(){
         return;
