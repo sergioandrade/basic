@@ -126,17 +126,6 @@ gulp.task('images', function(){
 });
 
 //====================================
-gulp.task('watch', function(){
-    gulp.watch(paths.src.scripts, ['scripts']); 
-    gulp.watch(paths.src.styles,  ['sass']); 
-    gulp.watch(paths.src.fonts,   ['fonts']); 
-    gulp.watch(paths.src.images,  ['images']); 
-    gulp.watch(paths.src.html,    ['inject']);
-    
-    gulp.watch(paths.dist.html).on('change', browserSync.reload);
-})
-
-//====================================
 gulp.task('index', ['scripts', 'sass', 'html'], function () {
     gulp.src(paths.dist.html+'index.html')
         .pipe(inject(gulp.src(injectable, {read: false}), {relative: true}))
@@ -166,6 +155,17 @@ gulp.task('environments', function () {
     })))
     .pipe(gulp.dest('./src/app/'))
 });
+
+//====================================
+gulp.task('watch', function(){
+    gulp.watch(paths.src.scripts, ['scripts']); 
+    gulp.watch(paths.src.styles,  ['sass']); 
+    gulp.watch(paths.src.fonts,   ['fonts']); 
+    gulp.watch(paths.src.images,  ['images']); 
+    gulp.watch(paths.src.html,    ['inject']);
+    
+    gulp.watch(paths.dist.html).on('change', browserSync.reload);
+})
 
 gulp.task('default',[
         'watch',
