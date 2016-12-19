@@ -9,11 +9,13 @@
 		function($locationProvider, $stateProvider, $urlRouterProvider){
 			$urlRouterProvider.otherwise("/");
 			$stateProvider
+
 			.state("root", {
 				url: "",
 				abstract: true,
 				template: "<div ui-view></div>"
 			})
+
 			.state("root.home", {
 				url: "/",
 				templateUrl: "./app/modules/home/home.html",
@@ -22,8 +24,15 @@
 					nome: "parametro do controller da home"
 				}
 			})
+
+			.state("root.criar-proposta", {
+				url: "/criar-proposta",
+				templateUrl: "./app/modules/proposta/criar-proposta/criar-proposta.html",
+				controller: "criarPropostaController",
+				params: {
+					nome: "criar propostas"
+				}
+			})
 		}
 	])
-
-
 })();
