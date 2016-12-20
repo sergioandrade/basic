@@ -1,13 +1,15 @@
 {
 	"env": {
 		"development": {
-			"env": {
-				"api": "http://localhost/"
+			"SETTINGS": {
+				"API": "http://localhost/",
+				"LOADING_DELAY": 0
 			}
 		},
 		"production": {
-			"env": {
-				"api": "https://api.production.com/"
+			"SETTINGS": {
+				"API": "https://api.production.com/",
+				"LOADING_DELAY": 0
 			}
 		}
 	}

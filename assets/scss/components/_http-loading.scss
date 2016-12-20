@@ -1,0 +1,50 @@
+/*===============================
+=            loading            =
+===============================*/
+
+http-loading{
+	display: none;
+}
+.http-loading{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(#000,0.5);
+	z-index: 9999;
+	background-blend-mode: multiply;
+	&:before{
+		content: "";
+		position: absolute;
+		@include centered(40px, 40px);
+		border-radius: 50%;
+		border: 4px solid transparent;
+		border-top-color: #fff;
+		border-bottom-color: #fff;
+		animation: http-loading 0.5s linear infinite;
+	}
+	&:after{
+		content: "CARREGANDO";
+		position: absolute;
+		top: 55%;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		letter-spacing: 8px;
+		text-indent: 8px;
+	}
+}
+
+@keyframes http-loading {
+    from {
+        -webkit-transform: rotate(0);
+        transform: rotate(0)
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+

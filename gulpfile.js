@@ -15,15 +15,17 @@ var production       = environments.production;
 var paths            = {
     'src':{
         'scripts': [
+            './bower_components/jquery/jquery.min.js',
             './bower_components/angular/angular.js',
             './bower_components/angular-ui-router/release/angular-ui-router.js',
             './bower_components/angular-sanitize/angular-sanitize.js',
-            './assets/js/*.js',
+            './assets/vendor/toastr/toastr.js',
             './src/**/*.js'
         ],
         'styles': [
             './assets/scss/*.scss',
             './assets/scss/**/*.scss',
+            './assets/vendor/toastr/toastr.scss'
         ],
         'images': [
             './assets/img/*.+(png|jpg|jpeg|gif|svg)',
@@ -100,9 +102,9 @@ gulp.task('sass', function(){
         cascade: true
     }))
     .pipe(gulp.dest(paths.dist.styles))
-    .pipe(production(browserSync.reload({
+    .pipe(browserSync.reload({
         stream: true
-    })))
+    }))
 })
 
 //====================================
