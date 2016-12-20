@@ -19,11 +19,13 @@ var paths            = {
             './bower_components/angular/angular.js',
             './bower_components/angular-ui-router/release/angular-ui-router.js',
             './bower_components/angular-sanitize/angular-sanitize.js',
+            './assets/vendor/toastr/toastr.js',
             './src/**/*.js'
         ],
         'styles': [
             './assets/scss/*.scss',
             './assets/scss/**/*.scss',
+            './assets/vendor/toastr/toastr.scss'
         ],
         'images': [
             './assets/img/*.+(png|jpg|jpeg|gif|svg)',

@@ -2,15 +2,17 @@
 =            loading            =
 ===============================*/
 
+http-loading{
+	display: none;
+}
 .http-loading{
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background: #ebebeb;
+	background: rgba(#000,0.5);
 	z-index: 9999;
-	opacity: 0.8;
 	background-blend-mode: multiply;
 	&:before{
 		content: "";
@@ -18,9 +20,9 @@
 		@include centered(40px, 40px);
 		border-radius: 50%;
 		border: 4px solid transparent;
-		border-top-color: #212121;
-		border-bottom-color: #212121;
-		animation: http-loading 0.5s linear infinite
+		border-top-color: #fff;
+		border-bottom-color: #fff;
+		animation: http-loading 0.5s linear infinite;
 	}
 	&:after{
 		content: "CARREGANDO";
@@ -29,7 +31,7 @@
 		left: 0;
 		width: 100%;
 		text-align: center;
-		color: #212121;
+		color: #fff;
 		letter-spacing: 8px;
 		text-indent: 8px;
 	}
