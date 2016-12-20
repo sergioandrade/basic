@@ -1,7 +1,7 @@
 <img src="http://logo.basic.surge.sh/basic.png" width="300px">
 
 <br>
-> _Basic_ - Estrutura básica para fazer projetos.
+> _Basic_ - Boilerplate para projetos web
 
 Basic é uma ferramenta para fazer aplicações usando angular, sass, gulp e outras coisas.
 
@@ -35,9 +35,9 @@ ___
 	3. Injetar e ordenar os arquivos Angular ---  ☑
 	4. Configurar Rotas e Módulos --------------  ☑
 	5. Configurar variáveis de ambiente --------  ☑
-	6. Usar template cache do Angular ----------  ✖
-	7. Configurar loaders ----------------------  ✖
-	8. Configurar mensagens de erros e etc -----  ✖
+	6. Configurar loaders ----------------------  ☑
+	7. Configurar mensagens de erros e etc -----  ☑
+	8. Usar template cache do Angular ----------  ✖
 
 ## License
 
