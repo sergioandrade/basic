@@ -6,10 +6,10 @@
 		"$scope",
 		"$log",
 		"$stateParams",
-		"env",
-		function($scope, $log, $stateParams, env){
+		"SETTINGS",
+		function($scope, $log, $stateParams, SETTINGS){
 			$log.debug('controler ' + $stateParams.nome);
-			console.log(env);
+			console.log(SETTINGS);
 		}
 	])
 

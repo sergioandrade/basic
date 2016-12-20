@@ -1,5 +1,5 @@
 (function () { 
  return angular.module("aprove.config", [])
-.constant("env", {"api":"http://localhost/"});
+.constant("SETTINGS", {"API":"http://localhost/","LOADING_DELAY":0});
 
 })();
