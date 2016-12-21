@@ -5,23 +5,23 @@
 	.directive("httpLoading", [
 		"$rootScope",
 		"SETTINGS",
-		 function ($rootScope, SETTINGS) {
+		"$timeout",
+		 function ($rootScope, SETTINGS, $timeout) {
 			return{
-				template: '<div class="http-loading"></div>',
 				link: function ($scope, element, attrs) {
 					
 					var timeout;
 					var delay = SETTINGS.LOADING_DELAY;
 				    
 			        $scope.$on("loader_show", function () {
-						timeout = setTimeout(function() {
+						timeout = $timeout(function() {
 					        element.fadeIn();
 						}, delay);
 			        })
 
 			        $scope.$on("loader_hide", function () {
 			            element.fadeOut();
-			        	clearTimeout(timeout);
+			        	$timeout.cancel(timeout);
 			        })
 			    }
 			}		

@@ -4,7 +4,7 @@
 	 * @description Toastr Factory
 	 */
 	angular.module('aprove.core')
-	.factory('toastrFactory',[
+	.factory('ToastrFactory',[
 	 	function () {
 	 		toastr.options = {
 	 			"closeButton": true,

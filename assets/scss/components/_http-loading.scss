@@ -4,8 +4,6 @@
 
 http-loading{
 	display: none;
-}
-.http-loading{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -13,7 +11,6 @@ http-loading{
 	width: 100%;
 	background: rgba(#000,0.5);
 	z-index: 9999;
-	background-blend-mode: multiply;
 	&:before{
 		content: "";
 		position: absolute;
@@ -39,11 +36,9 @@ http-loading{
 
 @keyframes http-loading {
     from {
-        -webkit-transform: rotate(0);
         transform: rotate(0)
     }
     to {
-        -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
     }
 }

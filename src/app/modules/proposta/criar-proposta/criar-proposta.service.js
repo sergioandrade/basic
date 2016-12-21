@@ -4,7 +4,7 @@
 	 * @description Criar Proposta Service
 	 */
 	angular.module('aprove.criar-proposta')
-	.service('criarPropostaService', [
+	.service('CriarPropostaService', [
 		'$http',
 		function($http) {
 			var _getData = function(){

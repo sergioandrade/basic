@@ -4,10 +4,10 @@
 	 * @description Criar Proposta Controller
 	 */
 	angular.module('aprove.criar-proposta')
-	.controller('criarPropostaController', [
+	.controller('CriarPropostaController', [
 		'$scope',
-		'criarPropostaService',
-		'toastrFactory',
+		'CriarPropostaService',
+		'ToastrFactory',
 		function($scope, criarPropostaService, toastrFactory){
 			$scope.load = function(){
 				

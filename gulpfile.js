@@ -102,9 +102,9 @@ gulp.task('sass', function(){
         cascade: true
     }))
     .pipe(gulp.dest(paths.dist.styles))
-    .pipe(production(browserSync.reload({
+    .pipe(browserSync.reload({
         stream: true
-    })))
+    }))
 })
 
 //====================================

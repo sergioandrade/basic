@@ -6,7 +6,8 @@
 		"$q",
 		"$rootScope",
 		"$log",
-		function ($q, $rootScope, $log) {
+		"ToastrFactory",
+		function ($q, $rootScope, $log, toastrFactory) {
 
 			var numLoadings = 0;
 
@@ -35,6 +36,8 @@
 		                // Hide loader
 		                $rootScope.$broadcast("loader_hide");
 		            }
+
+		            toastrFactory.error('API Inacessível!','Não foi possível acessar a API');
 
 		            return $q.reject(response);
 		        }
