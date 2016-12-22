@@ -1,6 +1,9 @@
 (function(){
 	"use strict";
-
+	/*
+	 * @description Confguração das rotas com o ui.router
+	 */
+	 
 	angular.module("aprove.core")
 	.config([
 		"$locationProvider",
@@ -28,11 +31,12 @@
 			.state("root.criar-proposta", {
 				url: "/criar-proposta",
 				templateUrl: "./app/modules/proposta/criar-proposta/criar-proposta.html",
-				controller: "criarPropostaController",
+				controller: "CriarPropostaController",
 				params: {
 					nome: "criar propostas"
 				}
 			})
 		}
 	])
+
 })();

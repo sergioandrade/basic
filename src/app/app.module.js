@@ -1,10 +1,14 @@
 (function(){
 	"use strict";
-	
+	/*
+	 * @description Instancia-se os modulos que serão usados em toda a aplicação no core
+	 */
+
 	angular.module("aprove.core", [
-		'ui.router'
+		"ui.router"
 	]);
 
+	//intanciando cada módulo
 	angular.module("aprove.home", []);
 	angular.module("aprove.criar-proposta", []);
 

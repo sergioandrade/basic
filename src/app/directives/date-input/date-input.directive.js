@@ -1,21 +1,25 @@
 (function(){
 	"use strict";
+	/*
+	 * @description Date Input directive
+	 */
 
-	angular.module('aprove')
-		.directive('dateInput', ["$rootScope",
+	angular.module("aprove")
+		.directive("dateInput", ["$rootScope",
 		function($rootScope) {
 			return {
-				restrict: 'E',
+				restrict: "E",
 				scope: {
-					name: '@'
+					name: "@"
 				},
-				templateUrl: 'app/directives/date-input/date-input.html',
+				templateUrl: "app/directives/date-input/date-input.html",
 				link: function(scope, element, attrs) {
-					element.on('change', function(event) {
-						alert('mudou a data')
+					element.on("change", function(event) {
+						alert("mudou a data")
 					});
 				}
 			}
 		}
 	]);
+
 })();

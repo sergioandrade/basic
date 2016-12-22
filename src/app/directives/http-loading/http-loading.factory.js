@@ -1,8 +1,11 @@
 (function(){
 	"use strict";
-	
+	/*
+	 * @description Http Loading Factory
+	 */
+
 	angular.module("aprove.core")
-	.factory('httpLoading', [
+	.factory("httpLoading", [
 		"$q",
 		"$rootScope",
 		"$log",
@@ -37,14 +40,12 @@
 		                $rootScope.$broadcast("loader_hide");
 		            }
 
-		            toastrFactory.error('API Inacessível!','Não foi possível acessar a API');
+		            toastrFactory.error("API Inacessível!","Não foi possível acessar a API");
 
 		            return $q.reject(response);
 		        }
 		    };
 		}
 	])
-	.config(function ($httpProvider) {
-		$httpProvider.interceptors.push('httpLoading');
-	});
+
 })();

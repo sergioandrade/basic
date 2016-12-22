@@ -3,8 +3,8 @@
 	/*
 	 * @description Toastr Factory
 	 */
-	angular.module('aprove.core')
-	.factory('ToastrFactory',[
+	angular.module("aprove.core")
+	.factory("ToastrFactory",[
 	 	function () {
 	 		toastr.options = {
 	 			"closeButton": true,

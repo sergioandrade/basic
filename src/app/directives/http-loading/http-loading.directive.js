@@ -1,7 +1,10 @@
 (function(){
 	"use strict";
+	/*
+	 * @description Http Loading
+	 */
 
-	angular.module('aprove.core')
+	angular.module("aprove.core")
 	.directive("httpLoading", [
 		"$rootScope",
 		"SETTINGS",
@@ -27,4 +30,5 @@
 			}		
 		}
 	])
+	
 })();

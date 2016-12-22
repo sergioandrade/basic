@@ -1,6 +1,9 @@
 (function(){
 	"use strict";
-
+	/*
+	 * @description Home Controller
+	 */
+	 
 	angular.module("aprove.home")
 	.controller("HomeController", [
 		"$scope",
