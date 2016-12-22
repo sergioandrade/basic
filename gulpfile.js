@@ -14,14 +14,15 @@ var development      = environments.development;
 var production       = environments.production;
 var paths            = {
     'src':{
-        'scripts': [
-            './bower_components/jquery/jquery.js',
-            './bower_components/angular/angular.js',
-            './bower_components/angular-ui-router/release/angular-ui-router.js',
-            './bower_components/angular-sanitize/angular-sanitize.js',
-            './assets/vendor/toastr/toastr.js',
-            './src/**/*.js'
-        ],
+        'scripts': {
+            'vendors': [
+                './bower_components/jquery/dist/jquery.js',
+                './bower_components/angular/angular.js',
+                './bower_components/angular-ui-router/release/angular-ui-router.js',
+                './assets/vendor/toastr/toastr.js',
+            ],
+            'app': './src/**/*.js'
+        },
         'styles': [
             './assets/scss/*.scss',
             './assets/scss/**/*.scss',
@@ -74,11 +75,31 @@ gulp.task('browserSync', function() {
 })
 
 //====================================
-gulp.task('scripts', ['environments'], function() {
-    return gulp.src(paths.src.scripts)
+gulp.task('vendors', function() {
+    return gulp.src(paths.src.scripts.vendors)
+    
     .pipe(production(uglify()))
-    .pipe(concat('main.min.js'))
+
+    .pipe(production(concat('vendors.min.js')))
+    .pipe(development(concat('vendors.js')))
+    
     .pipe(gulp.dest(paths.dist.scripts))
+
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+});
+
+gulp.task('scripts', ['vendors', 'environments'], function() {
+    return gulp.src(paths.src.scripts.app)
+    
+    .pipe(production(uglify()))
+
+    .pipe(production(concat('_main.min.js')))
+    .pipe(development(concat('_main.js')))
+    
+    .pipe(gulp.dest(paths.dist.scripts))
+
     .pipe(browserSync.reload({
         stream: true
     }))
@@ -87,20 +108,24 @@ gulp.task('scripts', ['environments'], function() {
 //====================================
 gulp.task('sass', function(){
     return gulp.src(paths.src.styles)
-    //dev
+
     .pipe(development(sass({
         style: 'expanded',
         sourceComments: 'normal'
     }).on('error', sass.logError)))
+    .pipe(development(concat('_main.css')))
 
-    //prod
     .pipe(production(sass({
        outputStyle: 'compressed'
     })))
+    .pipe(production(concat('_main.min.css')))
+    
     .pipe(autoprefixer({
         browsers: ['last 3 versions'],
         cascade: true
     }))
+    
+
     .pipe(gulp.dest(paths.dist.styles))
     .pipe(browserSync.reload({
         stream: true
@@ -160,11 +185,11 @@ gulp.task('environments', function () {
 
 //====================================
 gulp.task('watch', function(){
-    gulp.watch(paths.src.scripts, ['scripts']); 
-    gulp.watch(paths.src.styles,  ['sass']); 
-    gulp.watch(paths.src.fonts,   ['fonts']); 
-    gulp.watch(paths.src.images,  ['images']); 
-    gulp.watch(paths.src.html,    ['inject']);
+    gulp.watch(paths.src.scripts.app, ['scripts']); 
+    gulp.watch(paths.src.styles,      ['sass']); 
+    gulp.watch(paths.src.fonts,       ['fonts']); 
+    gulp.watch(paths.src.images,      ['images']); 
+    gulp.watch(paths.src.html,        ['inject']);
     
     gulp.watch(paths.dist.html).on('change', browserSync.reload);
 })

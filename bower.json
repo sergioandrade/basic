@@ -1,10 +1,11 @@
 {
-  "name": "Basic",
-  "description": "Basic structure",
+  "name": "basic",
+  "description": "basic boilerplate",
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "angular": "1.5.8",
-    "angular-ui-router": "^0.3.2"
+    "angular-ui-router": "^0.3.2",
+    "jquery": "^2.2.4"
   }
 }
