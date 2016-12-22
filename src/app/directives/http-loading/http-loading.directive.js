@@ -18,12 +18,12 @@
 				    
 			        $scope.$on("loader_show", function () {
 						timeout = $timeout(function() {
-					        element.fadeIn();
+					        element.stop().fadeIn();
 						}, delay);
 			        })
 
 			        $scope.$on("loader_hide", function () {
-			            element.fadeOut();
+			            element.stop().fadeOut();
 			        	$timeout.cancel(timeout);
 			        })
 			    }
