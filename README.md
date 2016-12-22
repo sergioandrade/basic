@@ -37,7 +37,6 @@ ___
 	5. Configurar variáveis de ambiente --------  ☑
 	6. Configurar loaders ----------------------  ☑
 	7. Configurar mensagens de erros e etc -----  ☑
-	8. Usar template cache do Angular ----------  ✖
 
 ## License
 
