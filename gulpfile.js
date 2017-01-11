@@ -10,6 +10,8 @@ var angularFilesort  = require('gulp-angular-filesort');
 var inject           = require('gulp-inject');
 var gulpNgConfig     = require('gulp-ng-config');
 var environments     = require('gulp-environments');
+var jshint           = require('gulp-jshint');
+var stylish          = require('jshint-stylish');
 var development      = environments.development;
 var production       = environments.production;
 var paths            = {
@@ -77,12 +79,12 @@ gulp.task('browserSync', function() {
 //====================================
 gulp.task('vendors', function() {
     return gulp.src(paths.src.scripts.vendors)
-    
+
     .pipe(production(uglify()))
 
     .pipe(production(concat('vendors.min.js')))
     .pipe(development(concat('vendors.js')))
-    
+
     .pipe(gulp.dest(paths.dist.scripts))
 
     .pipe(browserSync.reload({
@@ -92,12 +94,12 @@ gulp.task('vendors', function() {
 
 gulp.task('scripts', ['vendors', 'environments'], function() {
     return gulp.src(paths.src.scripts.app)
-    
+
     .pipe(production(uglify()))
 
     .pipe(production(concat('_main.min.js')))
     .pipe(development(concat('_main.js')))
-    
+
     .pipe(gulp.dest(paths.dist.scripts))
 
     .pipe(browserSync.reload({
@@ -119,12 +121,12 @@ gulp.task('sass', function(){
        outputStyle: 'compressed'
     })))
     .pipe(production(concat('_main.min.css')))
-    
+
     .pipe(autoprefixer({
         browsers: ['last 3 versions'],
         cascade: true
     }))
-    
+
 
     .pipe(gulp.dest(paths.dist.styles))
     .pipe(browserSync.reload({
@@ -168,16 +170,25 @@ gulp.task('inject', ['html'], function () {
         }))
 });
 
+
+
+gulp.task('lint', function() {
+  return gulp.src('./src/**/*.js')
+     .pipe(jshint('.jshintrc'))
+     .pipe(jshint.reporter('jshint-stylish'))
+});
+
+
 //====================================
 gulp.task('environments', function () {
     gulp.src(paths.config)
     .pipe(concat('app.config.js'))
     .pipe(production(gulpNgConfig('aprove.config', {
-        wrap: true,
+        wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
         environment: 'env.production'
     })))
     .pipe(development(gulpNgConfig('aprove.config', {
-        wrap: true,
+        wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
         environment: 'env.development'
     })))
     .pipe(gulp.dest('./src/app/'))
@@ -185,12 +196,12 @@ gulp.task('environments', function () {
 
 //====================================
 gulp.task('watch', function(){
-    gulp.watch(paths.src.scripts.app, ['scripts']); 
-    gulp.watch(paths.src.styles,      ['sass']); 
-    gulp.watch(paths.src.fonts,       ['fonts']); 
-    gulp.watch(paths.src.images,      ['images']); 
+    gulp.watch(paths.src.scripts.app, ['scripts']);
+    gulp.watch(paths.src.styles,      ['sass']);
+    gulp.watch(paths.src.fonts,       ['fonts']);
+    gulp.watch(paths.src.images,      ['images']);
     gulp.watch(paths.src.html,        ['inject']);
-    
+
     gulp.watch(paths.dist.html).on('change', browserSync.reload);
 })
 
