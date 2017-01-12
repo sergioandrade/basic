@@ -21,7 +21,7 @@
 	 			"hideEasing": "linear",
 	 			"showMethod": "fadeIn",
 	 			"hideMethod": "fadeOut"
-	 		}
+	 		};
 	 		return {
 	 			success: function (title, text) {
 	 				toastr.success(text, title);

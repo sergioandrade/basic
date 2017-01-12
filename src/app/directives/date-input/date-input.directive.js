@@ -6,19 +6,19 @@
 
 	angular.module("aprove")
 		.directive("dateInput", ["$rootScope",
-		function($rootScope) {
+		function() {
 			return {
 				restrict: "E",
 				scope: {
 					name: "@"
 				},
 				templateUrl: "app/directives/date-input/date-input.html",
-				link: function(scope, element, attrs) {
-					element.on("change", function(event) {
-						alert("mudou a data")
+				link: function(scope, element) {
+					element.on("change", function() {
+						alert("mudou a data");
 					});
 				}
-			}
+			};
 		}
 	]);
 

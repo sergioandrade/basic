@@ -11,7 +11,7 @@
 		"ToastrFactory",
 		function($scope, criarPropostaService, toastrFactory){
 			$scope.load = function(){
-				
+
 				criarPropostaService.getData()
 				.then(function(response){
 					console.log(response);
@@ -20,9 +20,9 @@
 				.catch(function(response){
 					console.log(response);
 					toastrFactory.error("Ops!","Algo não saiu como esperado, tente novamente mais tarde");
-				})
-			}
+				});
+			};
  		}
-	])
+	]);
 
 })();

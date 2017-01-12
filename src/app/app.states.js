@@ -3,7 +3,7 @@
 	/*
 	 * @description Confguração das rotas com o ui.router
 	 */
-	 
+
 	angular.module("aprove.core")
 	.config([
 		"$locationProvider",
@@ -35,8 +35,8 @@
 				params: {
 					nome: "criar propostas"
 				}
-			})
+			});
 		}
-	])
+	]);
 
 })();

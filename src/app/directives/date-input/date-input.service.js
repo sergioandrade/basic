@@ -12,9 +12,9 @@
 				return $http.get("http://correiosapi.apphb.com/cep/76873274");
 			};
 			return{
-				gethttp: _gethttp,
-			}
+				gethttp: _gethttp
+			};
 		}
-	])
+	]);
 
 })();

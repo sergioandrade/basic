@@ -9,8 +9,8 @@
         "$q",
         "$log",
         "$injector",
-        "ToastService",
-        function ($q, $log, $injector, toastService) {
+		"ToastFactory",
+        function ($q, $log, $injector, toastFactory) {
             return {
                 responseError: function (rejection) {
                     switch (rejection.status) {
@@ -32,7 +32,7 @@
                         break;
 
                         default:
-                        toastFactory.error("Ops!","Algo não saiu como esperado, tente novamente mais tarde.")
+                        toastFactory.error("Ops!","Algo não saiu como esperado, tente novamente mais tarde.");
                     }
                     return $q.reject(rejection);
                 }

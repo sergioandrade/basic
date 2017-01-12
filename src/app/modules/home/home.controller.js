@@ -3,7 +3,7 @@
 	/*
 	 * @description Home Controller
 	 */
-	 
+
 	angular.module("aprove.home")
 	.controller("HomeController", [
 		"$scope",
@@ -12,8 +12,8 @@
 		"SETTINGS",
 		function($scope, $log, $stateParams, SETTINGS){
 			$log.debug('controler ' + $stateParams.nome);
-			console.log(SETTINGS);
+			$log.debug(SETTINGS);
 		}
-	])
+	]);
 
 })();

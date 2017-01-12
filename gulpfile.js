@@ -92,7 +92,7 @@ gulp.task('vendors', function() {
     }))
 });
 
-gulp.task('scripts', ['vendors', 'environments'], function() {
+gulp.task('scripts', ['lint', 'vendors', 'environments'], function() {
     return gulp.src(paths.src.scripts.app)
 
     .pipe(production(uglify()))
