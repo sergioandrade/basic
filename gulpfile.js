@@ -12,6 +12,7 @@ var gulpNgConfig     = require('gulp-ng-config');
 var environments     = require('gulp-environments');
 var jshint           = require('gulp-jshint');
 var stylish          = require('jshint-stylish');
+var clean            = require('gulp-clean');
 var development      = environments.development;
 var production       = environments.production;
 var paths            = {
@@ -37,7 +38,6 @@ var paths            = {
         'fonts': './assets/fonts/**/*',
         'html': [
             './src/*.html',
-            './src/*.html',
             './src/**/*.html'
         ]
     },
@@ -55,6 +55,12 @@ var injectable = [
     paths.dist.scripts+'*js',
     paths.dist.styles+'*.css'
 ]
+
+//====================================
+gulp.task('clean', function () {
+    return gulp.src('./dist', {read: false})
+        .pipe(clean());
+});
 
 //====================================
 gulp.task('browserSync', function() {
@@ -127,7 +133,6 @@ gulp.task('sass', function(){
         cascade: true
     }))
 
-
     .pipe(gulp.dest(paths.dist.styles))
     .pipe(browserSync.reload({
         stream: true
@@ -137,7 +142,7 @@ gulp.task('sass', function(){
 //====================================
 gulp.task('html', function() {
     return gulp.src(paths.src.html)
-    .pipe(development(htmlmin({collapseWhitespace: true})))
+    .pipe(production(htmlmin({collapseWhitespace: true})))
     .pipe(gulp.dest(paths.dist.html))
 });
 
@@ -170,14 +175,12 @@ gulp.task('inject', ['html'], function () {
         }))
 });
 
-
-
+//====================================
 gulp.task('lint', function() {
   return gulp.src('./src/**/*.js')
      .pipe(jshint('.jshintrc'))
      .pipe(jshint.reporter('jshint-stylish'))
 });
-
 
 //====================================
 gulp.task('environments', function () {
