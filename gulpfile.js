@@ -1,3 +1,6 @@
+/**
+ * Declarations
+ */
 var gulp             = require('gulp');
 var sass             = require('gulp-sass');
 var htmlmin          = require('gulp-htmlmin');
@@ -50,19 +53,22 @@ var paths            = {
     },
     'config':'./src/app/settings/config.json'
 }
-
-var injectable = [
+var injectable       = [
     paths.dist.scripts+'*js',
     paths.dist.styles+'*.css'
 ]
 
-//====================================
+/**
+ * Clean dist directory before start the tasks
+ */
 gulp.task('clean', function () {
     return gulp.src('./dist', {read: false})
         .pipe(clean());
 });
 
-//====================================
+/**
+ * Create http-server with live reload for sass, html and js files
+ */
 gulp.task('browserSync', function() {
     browserSync.init({
         server: {
@@ -82,92 +88,110 @@ gulp.task('browserSync', function() {
     })
 })
 
-//====================================
+/**
+ * Concat and minify vendors files
+ */
 gulp.task('vendors', function() {
     return gulp.src(paths.src.scripts.vendors)
 
-    .pipe(production(uglify()))
+        .pipe(production(uglify()))
 
-    .pipe(production(concat('vendors.min.js')))
-    .pipe(development(concat('vendors.js')))
+        .pipe(production(concat('vendors.min.js')))
+        .pipe(development(concat('vendors.js')))
 
-    .pipe(gulp.dest(paths.dist.scripts))
+        .pipe(gulp.dest(paths.dist.scripts))
 
-    .pipe(browserSync.reload({
-        stream: true
-    }))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
+/**
+ * Concat and minify scripts files
+ */
 gulp.task('scripts', ['lint', 'vendors', 'environments'], function() {
     return gulp.src(paths.src.scripts.app)
 
-    .pipe(production(uglify()))
+        .pipe(production(uglify()))
 
-    .pipe(production(concat('_main.min.js')))
-    .pipe(development(concat('_main.js')))
+        .pipe(production(concat('_main.min.js')))
+        .pipe(development(concat('_main.js')))
 
-    .pipe(gulp.dest(paths.dist.scripts))
+        .pipe(gulp.dest(paths.dist.scripts))
 
-    .pipe(browserSync.reload({
-        stream: true
-    }))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
-//====================================
+/**
+ * Compile SASS to css with autoprefixer
+ */
 gulp.task('sass', function(){
     return gulp.src(paths.src.styles)
 
-    .pipe(development(sass({
-        style: 'expanded',
-        sourceComments: 'normal'
-    }).on('error', sass.logError)))
-    .pipe(development(concat('_main.css')))
+        .pipe(development(sass({
+            style: 'expanded',
+            sourceComments: 'normal'
+        }).on('error', sass.logError)))
+        .pipe(development(concat('_main.css')))
 
-    .pipe(production(sass({
-       outputStyle: 'compressed'
-    })))
-    .pipe(production(concat('_main.min.css')))
+        .pipe(production(sass({
+           outputStyle: 'compressed'
+        })))
+        .pipe(production(concat('_main.min.css')))
 
-    .pipe(autoprefixer({
-        browsers: ['last 3 versions'],
-        cascade: true
-    }))
+        .pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: true
+        }))
 
-    .pipe(gulp.dest(paths.dist.styles))
-    .pipe(browserSync.reload({
-        stream: true
-    }))
+        .pipe(gulp.dest(paths.dist.styles))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 })
 
-//====================================
+/**
+ * Minify html
+ */
 gulp.task('html', function() {
     return gulp.src(paths.src.html)
-    .pipe(production(htmlmin({collapseWhitespace: true})))
-    .pipe(gulp.dest(paths.dist.html))
+        .pipe(production(htmlmin({collapseWhitespace: true})))
+        .pipe(gulp.dest(paths.dist.html))
 });
 
-//====================================
+/**
+ * Transfering fonts from /src to /dist
+ */
 gulp.task('fonts', function() {
     return gulp.src(paths.src.fonts)
-    .pipe(gulp.dest(paths.dist.fonts))
+        .pipe(gulp.dest(paths.dist.fonts))
 });
 
-//====================================
+/**
+ * Transfering images from /src to /dist with minification
+ */
 gulp.task('images', function(){
     return gulp.src(paths.src.images)
-    .pipe(imagemin())
-    .pipe(gulp.dest(paths.dist.images))
+        .pipe(imagemin())
+        .pipe(gulp.dest(paths.dist.images))
 });
 
-//====================================
+/**
+ * Starting inject js and css files to index.html after run each taks
+ */
 gulp.task('index', ['scripts', 'sass', 'html'], function () {
-    gulp.src(paths.dist.html+'index.html')
+    return gulp.src(paths.dist.html+'index.html')
         .pipe(inject(gulp.src(injectable, {read: false}), {relative: true}))
         .pipe(gulp.dest('./dist'));
 });
 
+/**
+ * Starting inject js and css files to index.html whitout run script, and sass tasks
+ */
 gulp.task('inject', ['html'], function () {
-    gulp.src(paths.dist.html+'index.html')
+    return gulp.src(paths.dist.html+'index.html')
         .pipe(inject(gulp.src(injectable, {read: false}), {relative: true}))
         .pipe(gulp.dest('./dist'))
         .pipe(browserSync.reload({
@@ -175,29 +199,35 @@ gulp.task('inject', ['html'], function () {
         }))
 });
 
-//====================================
+/**
+ * Prevent code pattern validations in js files
+ */
 gulp.task('lint', function() {
-  return gulp.src('./src/**/*.js')
-     .pipe(jshint('.jshintrc'))
-     .pipe(jshint.reporter('jshint-stylish'))
+    return gulp.src('./src/**/*.js')
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'))
 });
 
-//====================================
+/**
+ * Set environment according each situation
+ */
 gulp.task('environments', function () {
-    gulp.src(paths.config)
-    .pipe(concat('app.config.js'))
-    .pipe(production(gulpNgConfig('aprove.config', {
-        wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
-        environment: 'env.production'
-    })))
-    .pipe(development(gulpNgConfig('aprove.config', {
-        wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
-        environment: 'env.development'
-    })))
-    .pipe(gulp.dest('./src/app/'))
+    return gulp.src(paths.config)
+        .pipe(concat('app.config.js'))
+        .pipe(production(gulpNgConfig('aprove.config', {
+            wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
+            environment: 'env.production'
+        })))
+        .pipe(development(gulpNgConfig('aprove.config', {
+            wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
+            environment: 'env.development'
+        })))
+        .pipe(gulp.dest('./src/app/'))
 });
 
-//====================================
+/**
+ * Watching file modifications for trigger browser sync
+ */
 gulp.task('watch', function(){
     gulp.watch(paths.src.scripts.app, ['scripts']);
     gulp.watch(paths.src.styles,      ['sass']);
@@ -208,6 +238,9 @@ gulp.task('watch', function(){
     gulp.watch(paths.dist.html).on('change', browserSync.reload);
 })
 
+/**
+ * Default task for development
+ */
 gulp.task('default',[
         'watch',
         'index',
@@ -221,6 +254,9 @@ gulp.task('default',[
     }
 )
 
+/**
+ * Build a app for production
+ */
 gulp.task('build',[
         'index',
         'images',
