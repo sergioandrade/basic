@@ -14,7 +14,8 @@
     "start": "gulp --env development",
     "postinstall": "bower install",
     "dev": "gulp clean && gulp --env testing",
-    "prod": "gulp clean && gulp build --env production"
+    "prod": "gulp clean && gulp build --env production",
+    "test": "gulp clean && gulp testing --env testing"
   },
   "devDependencies": {
     "bower": "^1.7.9",

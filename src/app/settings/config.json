@@ -11,6 +11,12 @@
 				"API": "https://api.production.com/",
 				"LOADING_DELAY": 0
 			}
+		},
+		"testing": {
+			"SETTINGS": {
+				"API": "https://api.testing.com/",
+				"LOADING_DELAY": 0
+			}
 		}
 	}
 }

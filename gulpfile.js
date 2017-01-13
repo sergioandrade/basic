@@ -1,24 +1,26 @@
 /**
  * Declarations
  */
-var gulp             = require('gulp');
-var sass             = require('gulp-sass');
-var htmlmin          = require('gulp-htmlmin');
-var autoprefixer     = require('gulp-autoprefixer');
-var imagemin         = require('gulp-imagemin');
-var uglify           = require('gulp-uglify');
-var concat           = require('gulp-concat');
-var browserSync      = require('browser-sync').create();
-var angularFilesort  = require('gulp-angular-filesort');
-var inject           = require('gulp-inject');
-var gulpNgConfig     = require('gulp-ng-config');
-var environments     = require('gulp-environments');
-var jshint           = require('gulp-jshint');
-var stylish          = require('jshint-stylish');
-var clean            = require('gulp-clean');
-var development      = environments.development;
-var production       = environments.production;
-var paths            = {
+var gulp                  = require('gulp');
+var sass                  = require('gulp-sass');
+var htmlmin               = require('gulp-htmlmin');
+var autoprefixer          = require('gulp-autoprefixer');
+var imagemin              = require('gulp-imagemin');
+var uglify                = require('gulp-uglify');
+var concat                = require('gulp-concat');
+var browserSync           = require('browser-sync').create();
+var angularFilesort       = require('gulp-angular-filesort');
+var inject                = require('gulp-inject');
+var gulpNgConfig          = require('gulp-ng-config');
+var environments          = require('gulp-environments');
+var jshint                = require('gulp-jshint');
+var stylish               = require('jshint-stylish');
+var clean                 = require('gulp-clean');
+var development           = environments.development;
+var production            = environments.production;
+var testing               = environments.make('testing');
+
+var paths                 = {
     'src':{
         'scripts': {
             'vendors': [
@@ -70,11 +72,12 @@ gulp.task('clean', function () {
  * Create http-server with live reload for sass, html and js files
  */
 gulp.task('browserSync', function() {
+    var _ghost = testing() ? true : false;
     browserSync.init({
         server: {
             baseDir: './dist'
         },
-        ghostMode: false,
+        ghostMode: _ghost,
         notify: {
             styles: {
                 "bottom": "10px",
@@ -93,14 +96,19 @@ gulp.task('browserSync', function() {
  */
 gulp.task('vendors', function() {
     return gulp.src(paths.src.scripts.vendors)
-
-        .pipe(production(uglify()))
-
-        .pipe(production(concat('vendors.min.js')))
+        //develompent
         .pipe(development(concat('vendors.js')))
 
-        .pipe(gulp.dest(paths.dist.scripts))
+        //testing
+        .pipe(testing(uglify()))
+        .pipe(testing(concat('vendors.min.js')))
+        
+        //production
+        .pipe(production(uglify()))
+        .pipe(production(concat('vendors.min.js')))
 
+        //default
+        .pipe(gulp.dest(paths.dist.scripts))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -111,14 +119,20 @@ gulp.task('vendors', function() {
  */
 gulp.task('scripts', ['lint', 'vendors', 'environments'], function() {
     return gulp.src(paths.src.scripts.app)
-
-        .pipe(production(uglify()))
-
-        .pipe(production(concat('_main.min.js')))
+        //develompent
         .pipe(development(concat('_main.js')))
 
-        .pipe(gulp.dest(paths.dist.scripts))
+        //testing
+        .pipe(testing(uglify()))
+        .pipe(testing(concat('_main.min.js')))
+        
+        //production
+        .pipe(production(uglify()))
+        .pipe(production(concat('_main.min.js')))
+        
 
+        //default
+        .pipe(gulp.dest(paths.dist.scripts))
         .pipe(browserSync.reload({
             stream: true
         }))
@@ -129,23 +143,31 @@ gulp.task('scripts', ['lint', 'vendors', 'environments'], function() {
  */
 gulp.task('sass', function(){
     return gulp.src(paths.src.styles)
-
+        //develompent
         .pipe(development(sass({
             style: 'expanded',
             sourceComments: 'normal'
-        }).on('error', sass.logError)))
+        })
+        .on('error', sass.logError)))
         .pipe(development(concat('_main.css')))
 
+        //testing
+        .pipe(testing(sass({
+           outputStyle: 'compressed'
+        })))
+        .pipe(testing(concat('_main.min.css')))
+
+        //production
         .pipe(production(sass({
            outputStyle: 'compressed'
         })))
         .pipe(production(concat('_main.min.css')))
 
+        //default
         .pipe(autoprefixer({
             browsers: ['last 3 versions'],
             cascade: true
         }))
-
         .pipe(gulp.dest(paths.dist.styles))
         .pipe(browserSync.reload({
             stream: true
@@ -222,6 +244,10 @@ gulp.task('environments', function () {
             wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
             environment: 'env.development'
         })))
+         .pipe(testing(gulpNgConfig('aprove.config', {
+            wrap: '(function(){ \n "use strict"; \n return <%= module %> \n })();',
+            environment: 'env.testing'
+        })))
         .pipe(gulp.dest('./src/app/'))
 });
 
@@ -262,6 +288,21 @@ gulp.task('build',[
         'images',
         'fonts',
         'html'
+    ],function(){
+        return;
+    }
+)
+
+/**
+ * Testing a app for production
+ */
+gulp.task('testing',[
+        'index',
+        'images',
+        'fonts',
+        'html',
+        'environments',
+        'browserSync'
     ],function(){
         return;
     }
