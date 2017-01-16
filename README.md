@@ -30,15 +30,15 @@ No modo production a aplicação apenas faz o build, minificando os arquivos e o
 ___
 *TODO*
 
-	1. Compilar SASS ---------------------------  ☑ 
-	2. Minificar e agrupar JS ------------------  ☑
-	3. Injetar e ordenar os arquivos Angular ---  ☑
-	4. Configurar Rotas e Módulos --------------  ☑
-	5. Configurar variáveis de ambiente --------  ☑
-	6. Configurar loaders ----------------------  ☑
-	7. Configurar mensagens de erros e etc -----  ☑
-    8. Validador de JavaScript -----------------  ☑
-    9. Ambiente de testes com browser-sync -----  ☑
+- [x] Compilar SASS  
+- [x] Minificar e agrupar JS 
+- [x] Injetar e ordenar os arquivos Angular 
+- [x] Configurar Rotas e Módulos 
+- [x] Configurar variáveis de ambiente 
+- [x] Configurar loaders 
+- [x] Configurar mensagens de erros e etc 
+- [x] Validador de JavaScript 
+- [x] Ambiente de testes com browser-sync 
 
 ## License
 
