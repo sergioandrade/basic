@@ -13,7 +13,7 @@
   "scripts": {
     "start": "gulp --env development",
     "postinstall": "bower install",
-    "dev": "gulp clean && gulp --env testing",
+    "dev": "gulp clean && gulp --env development",
     "prod": "gulp clean && gulp build --env production",
     "test": "gulp clean && gulp testing --env testing"
   },
