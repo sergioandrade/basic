@@ -11,7 +11,7 @@ Basic é uma ferramenta para fazer aplicações usando angular, sass, gulp e out
 ```shell
 $ npm install
 ```
-Através do npm install, o basic vai buscar todas as dependências necessárias para rodar e após isso vai chamar o `bower install` automaticamente
+Através do npm install, o basic vai buscar todas as dependências necessárias para rodar
 
 ## Rodando modo desenvolvimento
 ```shell

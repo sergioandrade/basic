@@ -11,13 +11,13 @@
   "author": "sergio.andrade",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "gulp --env development",
-    "postinstall": "bower install",
+    "start": "npm install && gulp clean && gulp --env development",
     "dev": "gulp clean && gulp --env development",
-    "prod": "gulp clean && gulp build --env production",
-    "test": "gulp clean && gulp testing --env testing"
+    "build": "gulp clean && gulp build --env production"
   },
   "devDependencies": {
+    "@uirouter/angularjs": "^1.0.20",
+    "angular": "^1.7.2",
     "bower": "^1.7.9",
     "browser-sync": "^2.16.0",
     "gulp": "^3.9.1",
@@ -31,13 +31,13 @@
     "gulp-inject": "^4.1.0",
     "gulp-jshint": "^2.0.4",
     "gulp-ng-config": "^1.3.1",
-    "gulp-sass": "^2.0.4",
+    "gulp-sass": "^4.0.1",
     "gulp-uglify": "^2.0.0",
+    "jquery": "^3.3.1",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1"
   },
   "dependencies": {
-    "bower": "^1.8.0",
     "gulp": "^3.9.1"
   }
 }

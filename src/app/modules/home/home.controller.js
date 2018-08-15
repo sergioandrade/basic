@@ -13,6 +13,7 @@
 		function($scope, $log, $stateParams, SETTINGS){
 			$log.debug('controler ' + $stateParams.nome);
 			$log.debug(SETTINGS);
+			$scope.hello = "HELLO WORLD"
 		}
 	]);
 
